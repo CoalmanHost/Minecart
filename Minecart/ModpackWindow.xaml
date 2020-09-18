@@ -1,0 +1,27 @@
+﻿<Window x:Class="Minecart.ModpackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Minecart"
+        mc:Ignorable="d"
+        Title="Modpack settings" Height="602" Width="492.8">
+    <Grid>
+        <ListBox x:Name="ModsListBox" HorizontalAlignment="Left" Height="302" Margin="39,108,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="ModsListBox_SelectionChanged"/>
+        <Button x:Name="SaveModpackButton" Content="Save" HorizontalAlignment="Left" Height="29" Margin="343,513,0,0" VerticalAlignment="Top" Width="114" FontSize="16" Click="SaveModpackButton_Click"/>
+        <Button x:Name="AddModButton" Content="+" HorizontalAlignment="Left" Height="24" Margin="133,410,0,0" VerticalAlignment="Top" Width="90" Click="AddModButton_Click"/>
+        <TextBox x:Name="ModpackNameTextBox" HorizontalAlignment="Left" Height="29" Margin="39,29,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="418" FontSize="16" TextChanged="ModpackNameTextBox_TextChanged"/>
+        <Button x:Name="RemoveModButton" Content="-" HorizontalAlignment="Left" Margin="39,410,0,0" VerticalAlignment="Top" Width="94" Height="24" Click="RemoveModButton_Click"/>
+        <ListBox x:Name="ModpacksListBox" HorizontalAlignment="Left" Height="170" Margin="281,108,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="ModpacksListBox_SelectionChanged"/>
+        <Button x:Name="RemoveModpackButton" Content="-" HorizontalAlignment="Left" Height="18" Margin="281,278,0,0" VerticalAlignment="Top" Width="88" Click="RemoveModpackButton_Click"/>
+        <Button x:Name="AddModpackButton" Content="+" HorizontalAlignment="Left" Height="18" Margin="369,278,0,0" VerticalAlignment="Top" Width="88" Click="AddModpackButton_Click"/>
+        <Button x:Name="DeleteModpackButton" Content="Delete pack" HorizontalAlignment="Left" Height="29" Margin="39,513,0,0" VerticalAlignment="Top" Width="116" Click="DeleteModpackButton_Click"/>
+        <Label Content="Name of the pack" HorizontalAlignment="Left" Height="29" Margin="39,0,0,0" VerticalAlignment="Top" Width="116"/>
+        <Label Content="Mods of this package:" HorizontalAlignment="Left" Height="26" Margin="39,82,0,0" VerticalAlignment="Top" Width="184"/>
+        <Label Content="Base packages:" HorizontalAlignment="Left" Height="26" Margin="281,82,0,0" VerticalAlignment="Top" Width="176"/>
+        <TextBlock x:Name="ParentsModpacksTextBlock" HorizontalAlignment="Left" Height="112" Margin="301,354,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="130"/>
+        <Label Content="Used in packages:" HorizontalAlignment="Left" Height="28" Margin="301,326,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label x:Name="ModpackIDLabel" Content="Label" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Height="29" Margin="327,0,0,0" VerticalAlignment="Top" Width="130"/>
+
+    </Grid>
+</Window>
