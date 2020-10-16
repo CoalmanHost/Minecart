@@ -37,6 +37,7 @@ namespace Minecart
             modpacks = new ModpacksList();
             Directory.CreateDirectory(modsDirName);
             Directory.CreateDirectory(modpacksDirName);
+            File.WriteAllText(settingsFileName, JsonConvert.SerializeObject(this));
         }
         public MinecartProfile(string gamedir) : this()
         {
@@ -99,27 +100,27 @@ namespace Minecart
                 mod.DeployTo(GameModsDir);
             }
         }
+
+        public void DeployModpackProgressive(Modpack modpack, Progress progress)
+        {
+            Directory.CreateDirectory(GameModsDir);
+            foreach (var mod in modpack.GetAllMods())
+            {
+                mod.DeployTo(GameModsDir);
+                progress.Step();
+            }
+        }
+
         public void DetachActiveModpack()
         {
             if (Directory.Exists(GameModsDir))
             {
-                foreach (var item in Directory.GetFiles(GameModsDir))
-                {
-                    File.Delete(item);
-                }
-                Directory.Delete(GameModsDir);
+                Directory.Delete(GameModsDir, true);
             }
         }
         public static bool Exists()
         {
-            foreach (var item in Directory.GetFiles(Directory.GetCurrentDirectory()))
-            {
-                if (item == settingsFileName)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return File.Exists(settingsFileName);
         }
     }
 }

@@ -35,21 +35,9 @@ namespace Minecart
             {
                 profile = new MinecartProfile();
             }
-            else
-            {
-                
-                
-                /*try
-                {
-                    
-                }
-                catch (Exception)
-                {
-                    profile = new MinecartProfile();
-                }*/
-            }
             profile = MinecartProfile.LoadProfile();
             PathTextBox.Text = profile.gamedir;
+            PathTextBox.IsReadOnly = true;
             profile.SaveSettings();
             foreach (var pack in profile.modpacks)
             {
@@ -95,7 +83,16 @@ namespace Minecart
 
         private void SetPathButton_Click(object sender, RoutedEventArgs e)
         {
-            profile.gamedir = PathTextBox.Text;
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = MinecartProfile.modsDirName;
+            dialog.IsFolderPicker = true;
+            dialog.Multiselect = false;
+            dialog.ShowDialog();
+            foreach (var item in dialog.FileNames)
+            {
+                profile.gamedir = item;
+            }
+            PathTextBox.Text = profile.gamedir;
             profile.SaveSettings();
         }
 
@@ -115,7 +112,12 @@ namespace Minecart
         private void DeployButton_Click(object sender, RoutedEventArgs e)
         {
             profile.DetachActiveModpack();
-            profile.DeployModpack(profile.GetModpack(ModpacksListBox.SelectedItem.ToString()));
+            //profile.DeployModpack(profile.GetModpack(ModpacksListBox.SelectedItem.ToString()));
+            Modpack pack = profile.GetModpack(ModpacksListBox.SelectedItem.ToString());
+            IEnumerable<Mod> mods = pack.GetAllMods();
+            Progress progress = new Progress(mods.Count());
+            ProgressBar progressWindow = new ProgressBar($"Deployment of \"{pack.Name}\" modpack...", progress, (Progress p) => { profile.DeployModpackProgressive(pack, p); });
+            progressWindow.ShowDialog();
             ModsListBox.SelectedItem = null;
         }
     }

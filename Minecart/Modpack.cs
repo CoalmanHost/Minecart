@@ -147,6 +147,11 @@ namespace Minecart
                 parent.ChildrenModpacks.Remove(this);
                 parent.children.Remove(id);
             }
+            foreach (var child in ChildrenModpacks)
+            {
+                child.ParentsModpacks.Remove(this);
+                child.parents.Remove(id);
+            }
         }
 
         public IEnumerable<Mod> GetAllMods()
